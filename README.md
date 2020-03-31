@@ -4,7 +4,7 @@ Log on to JURECA or JUWELS. Follow the steps below to run a simple test case.
 
   1. [Clone CTSM repository](#clone-ctsm-repository)
   2. [Configure environment](#configure-environment)
-      * [Activate project](#activate-project)
+      * [Activate compute project](#activate-compute-project)
       * [Create CTSM data directory](#create-ctsm-data-directory)
       * [Manage dependencies](#manage-dependencies)
       * [Create CIME config file](#create-cime-config-file)
@@ -32,7 +32,7 @@ CTSMROOT=`pwd`
 
 ### Configure environment
 
-#### Activate project
+#### Activate compute project
 
 ```
 jutil env activate -p <projectID>
@@ -44,13 +44,31 @@ Note that you must specify a value for `projectID`. To determine which projects 
     
 #### Create CTSM data directory
 
-Create a folder named `CESMDataRoot` under `$SCRATCH` file system as this folder would be huge. Run these commands:
+CTSM processes a huge stream of data files. Inputs are read from files in [netCDF][] format (.nc), which is a standardized format for representing scientific data. Outputs take the form of binaries, structured data files, logs, and various other formats. Altogether, CTSM consumes a number of files (*a.k.a* [inodes][]) and storage space that significantly grows larger with the complexity of a test case. The CTSM data directory should be prepared according to these expectations.
+
+The [$SCRATCH file system][], a large data storage with high I/O bandwidth, is best suited for this purpose. This file system is also accessible from most compute projects. Start by creating your own personal folder under `$SCRATCH`. You may skip this step if you already have one.
 
 ```Shell
-cd $SCRATCH/$USER
+mkdir $SCRATCH/$USER
+```
+
+Switch to your `$SCRATCH` personal folder by running `cd $SCRATCH/$USER` or `cd $SCRATCH/<your-folder>`. Then start creating the directories:
+
+```Shell
 mkdir CESMDataRoot; cd CESMDataRoot
 mkdir InputData CaseOutputs Archive BaselineTests
 export CESMDATAROOT=`pwd`
+```
+
+Verify that the folders created match the folder structure below (run `tree` or `ls`).
+
+```
+.
+└── CESMDataRoot/
+    ├── CaseOutputs/
+    ├── Archive/
+    ├── BaselineTests/
+    └── InputData/
 ```
 
 This particular folder structure follows the definitions for JURECA and JUWELS in [config_machines.xml][].
@@ -186,6 +204,9 @@ The job outputs are saved to `$CESMDATAROOT/CaseOutputs/testMXC/run/`.
 * [JURECA](https://apps.fz-juelich.de/jsc/hps/jureca/index.html#) and [JUWELS](https://apps.fz-juelich.de/jsc/hps/juwels/index.html#) User Guides 
 
 [checkout_externals]: manage_externals/checkout_externals/README.md
+[netCDF]: https://www.unidata.ucar.edu/software/netcdf/docs/faq.html
+[inodes]: https://unix.stackexchange.com/a/117094
+[$SCRATCH file system]: https://www.fz-juelich.de/SharedDocs/FAQs/IAS/JSC/EN/JUST/FAQ_00_File_systems.html
 [CIME repository]: https://github.com/HPSCTerrSys/cime
 [config_machines.xml]: https://github.com/HPSCTerrSys/cime/blob/master/config/cesm/machines/config_machines.xml#L1546
 [module system]: https://www.fz-juelich.de/ias/jsc/EN/Expertise/Supercomputers/JURECA/Software/Software_node.html
