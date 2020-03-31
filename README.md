@@ -92,7 +92,7 @@ CHARGE_ACCOUNT =
 MAIL_USER      = 
 COMPILER       = intel
 MPILIB         = psmpi
-INPUT_DIR      = $CESMDATAROOT/InputData
+INPUT_DIR      = 
 MAIL_TYPE      = 
 ```
 
@@ -100,6 +100,7 @@ Supply the missing fields:
 
 * `PROJECT` Project ID specified during the [activate project](#activate-project) step.
 * `CHARGE_ACCOUNT` Account name associated with the project ID. Run `printenv BUDGET_ACCOUNTS` to see which accounts are available.
+* `INPUT_DIR` The resulting path when you run the command `echo $CESMDATAROOT/InputData`
 * `MAIL_USER` Email address. Notifications on the job status are sent to this email.
 * `MAIL_TYPE` Job notification type. Could be any of the following: **never**,**all**,**begin**,**fail**,**end**. Must be comma-separated if more one type is selected.
 
@@ -113,7 +114,7 @@ CHARGE_ACCOUNT = slts
 MAIL_USER      = my.name@fz-juelich.de
 COMPILER       = intel
 MPILIB         = psmpi
-INPUT_DIR      = $CESMDATAROOT/InputData
+INPUT_DIR      = /p/scratch/cslts/user1/CESMDataRoot/InputData
 MAIL_TYPE      = all
 ```
 
