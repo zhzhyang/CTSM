@@ -9,15 +9,15 @@ Log on to JURECA or JUWELS. Follow the steps below to run a simple test case.
       * [Manage dependencies](#manage-dependencies)
       * [Create CIME config file](#create-cime-config-file)
   3. [Run single point case](#run-single-point-case)
+      * [Create case](#create-case)
+      * [Setup](#setup)
+      * [Build](#build)
+      * [Submit](#submit)
+  4. [Run regional case (Optional)](#run-a-regional-case)
       * [Create case](#create-case-1)
       * [Setup](#setup-1)
       * [Build](#build-1)
       * [Submit](#submit-1)
-  4. [Run regional case (Optional)](#run-a-regional-case)
-      * [Create case](#create-case-2)
-      * [Setup](#setup-2)
-      * [Build](#build-2)
-      * [Submit](#submit-2)
 
 All information in this README are based from these [sources](#references).
 
@@ -187,9 +187,9 @@ Before submitting the job you may review the job summary by executing `./preview
 ./case.submit
 ```
 
-This script will automatically download the required inputs for Mexico test case if they are missing. Downloads will be skipped if `INPUT_DIR = /p/scratch/cslts/shared_data/rlmod_CLM_UCAR/inputdata` in your [CIME config file](#create-cime-config-file). Once the required inputs have been verified, the job is submitted to the queue. 
+This script will automatically download the required inputs for Mexico test case if they are missing. Downloads will be skipped if `INPUT_DIR = /p/scratch/cslts/shared_data/rlmod_CLM_UCAR/inputdata` on your [CIME config file](#create-cime-config-file). Once the required inputs have been verified, the job is submitted to the queue. 
 
-You will receive job notifications via email if `MAIL_TYPE` is set to `all` on your [CIME config file](#create-cime-config-file). You may also run these commands to check the job status:
+You will receive job notifications via email if `MAIL_TYPE = all` on your [CIME config file](#create-cime-config-file). You may also run these commands to check the job status:
 
 * `squeue -u $USER --start` Check whether the job has started or not.
 * `tail CaseStatus` View recent CIME activity logs. The run is successful if you see the lines `[yyyy-mm-dd hh:mm:ss]: model execution success` and `[yyyy-mm-dd hh:mm:ss]: case.run success`.
@@ -499,7 +499,7 @@ Run the model with simulation time span set to the whole year of 2017:
 ./case.submit
 ```
 
-Run `sacct` or `tailf CaseStatus` to track the job status (see [Submit](#submit-1) section for the 1x1 Mexico case). 
+Run `sacct` or `tailf CaseStatus` to track the job status (see [Submit](#submit) section for the 1x1 Mexico case). 
 
 When the model execution is complete, you may change the simulation time span and then run `./case.submit` again. The simulation time span should be within 2017 since the atmospheric forcing data is supplied only for this year. Below are some examples:
 
