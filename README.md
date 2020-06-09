@@ -156,7 +156,7 @@ cd $CTSMROOT/cime/scripts
 Create a new case by running
 
 ```Shell
-./create_newcase --case testMXC --res 1x1_mexicocityMEX --compset I1PtClm50SpGs --run-unsupported
+./create_newcase --case testMXC --res 1x1_mexicocityMEX --compset I1PtClm50SpRsGs --run-unsupported
 cd testMXC
 ```
 This command creates a folder named`testMXC` containing CIME environment files (`env_*.xml`) and symlinks to the CIME scripts. Make sure your working directory is set to `testMXC` in order to execute the next steps. 
